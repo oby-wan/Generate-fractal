@@ -6,14 +6,17 @@ using namespace std;
 
 Fractal::~Fractal() {																									
 	cout << "fractal destructor called" << endl;
+
+	delete[] grid;
+	grid = nullptr;
 }
 
-Fractal::Fractal() : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
+Fractal::Fractal() : cols(), rows(), maxIter(0), grid(nullptr), type(nullptr) {
 	cout << "default constructor called" << endl;
 }
 
 
-Fractal::Fractal(const Fractal& f) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
+Fractal::Fractal(const Fractal& f) : cols(f.cols), rows(f.rows), maxIter(f.MaxIter), grid(f.grid), type(f.type) {
 	cout << "Copy constructor called" << endl;
 }
 

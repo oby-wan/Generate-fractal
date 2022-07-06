@@ -5,6 +5,10 @@ using namespace std;
 Complex::~Complex() 
 {
 	cout << "complex destructor called" << endl;
+	delete[] imag;
+	imag = nullptr;
+	delete[] real;
+	real = nullptr;
 }
 
 Complex::Complex() : imag(0.0), real(0.0)
@@ -15,6 +19,7 @@ Complex::Complex() : imag(0.0), real(0.0)
 Complex::Complex(const Complex& a) : imag(a.imag), real(a.real)
 {
 	cout << "Copy constructor called" << endl;
+
 }
 
 Complex::Complex(double a, double b) : imag(a), real(b)
@@ -50,6 +55,6 @@ const Complex Complex::operator+(const Complex& a, const Complex& b)
 
 double Complex::getMagnitudeSquared(const Complex& a)
 {
-	double c = (a.imag) * (a.imag) + (a.real) * (a.real);
+	double c = pow(a.imag, 2) + pow(a.real,2 );
 	return c;
 }
