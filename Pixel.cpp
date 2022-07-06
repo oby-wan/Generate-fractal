@@ -11,7 +11,7 @@ Pixel::~Pixel() {
 
 }
 const unsigned int& Pixel::operator[](const char* c){
-
+	
 }
 
 Pixel::Pixel() : blue(0), green(0), red(0) {

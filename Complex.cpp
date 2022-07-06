@@ -33,7 +33,7 @@ double& Complex::operator[](const char* a)
 		exit(1);
 }
 
-const Complex Complex::operator*(const Complex& a, const Complex& b)
+const Complex operator*(const Complex& a, const Complex& b)
 {
 	Complex x;
 	x.real = a.real * b.real - a.imag * b.imag;
@@ -41,7 +41,7 @@ const Complex Complex::operator*(const Complex& a, const Complex& b)
 	return x;
 }
 
-const Complex Complex::operator+(const Complex& a, const Complex& b)
+const Complex operator+(const Complex& a, const Complex& b)
 {
 	Complex x;
 	x.imag = (a.imag) + (b.imag);
@@ -49,7 +49,7 @@ const Complex Complex::operator+(const Complex& a, const Complex& b)
 	return x;
 }
 
-double Complex::getMagnitudeSquared(const Complex& a)
+double getMagnitudeSquared(const Complex& a)
 {
 	double c = (a.imag)*(a.imag) + (a.real)*(a.real);
 	return c;
