@@ -14,7 +14,7 @@ Complex(const Complex& c) : imag(0), real(0) {
 	cout << "Copy constructor called" << endl;
 }
 
-Complex(double i, double r) : imag(0), real(0){
+Complex(double z, double c) : imag(0), real(0){
 	cout << "Parameterized constructor called" << endl;
 }
 
