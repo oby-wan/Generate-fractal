@@ -25,8 +25,9 @@ public:
 	const Fractal& operator=(const Fractal&);
 	Fractal& operator=(Fractal&&);
 
-	unsigned int converToPixel(unsigned int);
-	double getMagnitudeSquared(Complex);
+
+	Fractal testMoveConstructor(unsigned int rows, unsigned int cols, char c);
+	friend void saveToPPM();
 };
 
 

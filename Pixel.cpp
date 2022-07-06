@@ -23,3 +23,6 @@ Pixel::Pixel(const Pixel& p) : blue(0), green(0), red(0) {
 Pixel::Pixel(unsigned int blue, unsigned int green, unsigned int red) : blue(0), green(0), red(0) {
 	cout << "3-arg constructor called" << endl;
 }
+unsigned int Pixel::converToPixel(unsigned int color) {
+
+}

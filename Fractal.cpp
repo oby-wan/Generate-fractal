@@ -78,9 +78,16 @@ void Fractal::makeMandelbrotFractal() {
 
 }
 
-unsigned int Fractal::converToPixel(unsigned int color) {
+
+
+Fractal testMoveConstructor(unsigned int rows, unsigned int cols, char c) {
 
 }
-double Fractal::getMagnitudeSquared(Complex z) {
-	return sqrt(z);
+
+void saveToPPM() {
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+
+		}
+	}
 }

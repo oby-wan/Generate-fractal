@@ -16,5 +16,7 @@ public:
 	Pixel();
 	Pixel(const Pixel&);
 	Pixel(unsigned int, unsigned int, unsigned int);
+	unsigned int converToPixel(unsigned int color) {
 
+	}
 };

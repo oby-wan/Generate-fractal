@@ -2,27 +2,27 @@
 #include "Complex.hpp"
 using namespace std;
 
-~Complex() 
+Complex::~Complex() 
 {
 	cout << "complex destructor called" << endl;
 }
 
-Complex() : imag(0.0), real(0.0)
+Complex::Complex() : imag(0.0), real(0.0)
 {
 	cout << "default constructor called" << endl;
 }
 
-Complex(const Complex& a) : imag(a.imag), real(a.real)
+Complex::Complex(const Complex& a) : imag(a.imag), real(a.real)
 {
 	cout << "Copy constructor called" << endl;
 }
 
-Complex(double a, double b) : imag(a), real(b)
+Complex::Complex(double a, double b) : imag(a), real(b)
 {
 	cout << "Parameterized constructor called" << endl;
 }
 
-double& operator[](const char* a)
+double& Complex::operator[](const char* a)
 {
 	if (strcmp(a, "real") == 0)
 		return real;
@@ -32,7 +32,7 @@ double& operator[](const char* a)
 		exit(1);
 }
 
-const Complex operator*(const Complex& a, const Complex& b)
+const Complex Complex::operator*(const Complex& a, const Complex& b)
 {
 	Complex x;
 	x.real = a.real * b.real - a.imag * b.imag;
@@ -40,7 +40,7 @@ const Complex operator*(const Complex& a, const Complex& b)
 	return x;
 }
 
-const Complex operator+(const Complex& a, const Complex& b)
+const Complex Complex::operator+(const Complex& a, const Complex& b)
 {
 	Complex x;
 	x.imag = (a.imag) + (b.imag);
@@ -48,7 +48,7 @@ const Complex operator+(const Complex& a, const Complex& b)
 	return x;
 }
 
-double getMagnitudeSquared(const Complex& a)
+double Complex::getMagnitudeSquared(const Complex& a)
 {
 	double c = (a.imag) * (a.imag) + (a.real) * (a.real);
 	return c;
