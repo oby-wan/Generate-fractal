@@ -28,6 +28,8 @@ Fractal::Fractal(Fractal&& f) {
 
 Fractal::Fractal(unsigned int c, unsigned int r, char t) : cols(), rows(), maxItr(0), grid(nullptr), type(nullptr){
 	cout << "3-arg constructor called" << endl;
+
+
 }
 
 const Fractal& Fractal::operator=(const Fractal& f {
