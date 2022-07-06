@@ -127,7 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Complex.cpp" />
+    <ClCompile Include="Fractal.cpp" />
+    <ClCompile Include="Pixel.cpp" />
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Complex.hpp" />
+    <ClInclude Include="Fractal.hpp" />
+    <ClInclude Include="Pixel.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
