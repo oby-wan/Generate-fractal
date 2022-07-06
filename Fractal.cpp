@@ -61,14 +61,14 @@ void Fractal::makeMandelbrotFractal() {
 	Complex z;
 	Complex c;
 	double stepHeight = 4.0 / rows;
-	double step_width = 4.0 / cols;
+	double stepWidth = 4.0 / cols;
 
 	for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < cols; J++) {
-			imag[z] = 0.0;
-			real[z] = 0.0;
-			real[c] = ((double)i * step_height) - 2.0;
-			imag[c] = ((double)j * step_height) - 2.0;
+		for (int j = 0; j < cols; j++) {
+			z.imag = 0.0;
+			z.real = 0.0;
+			c.real = ((double)i * stepHeight) - 2.0;
+			c.imag = ((double)j * stepWidth) - 2.0;
 			
 
 			unsigned int color = determinePixelColor(z, c);
@@ -82,5 +82,5 @@ unsigned int Fractal::converToPixel(unsigned int color) {
 
 }
 double Fractal::getMagnitudeSquared(Complex z) {
-
+	return sqrt(z);
 }
