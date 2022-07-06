@@ -1,18 +1,19 @@
 #pragma once
 #include <iostream>
+using namespace std;
 
-
-class Complex{
-
-protected:
+class Complex
+{
+private:
 	double imag;
 	double real;
-
 public:
-	~Complex();
 	Complex();
+	~Complex();
 	Complex(const Complex&);
 	Complex(double, double);
 	double& operator[](const char*);
-
-}
+	friend const Complex operator*(const Complex&, const Complex&);
+	friend const Complex operator+(const Complex&, const Complex&);
+	friend double getMagnitudeSquared(const Complex&);
+};
