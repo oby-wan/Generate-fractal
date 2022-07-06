@@ -4,35 +4,38 @@
 
 using namespace std;
 
-~Fractal() {																									
+Fractal::~Fractal() {																									
 	cout << "fractal destructor called" << endl;
 }
 
-Fractal() : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
+Fractal::Fractal() : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
 	cout << "default constructor called" << endl;
 }
 
-Fractal(const Fractal& f) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
+
+Fractal::Fractal(const Fractal& f) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
 	cout << "Copy constructor called" << endl;
 }
 
-Fractal(Fractal&& f) {
+
+Fractal::Fractal(Fractal&& f) {
 	cout << "Move constructor called..." << endl;
 }
 
-Fractal(unsigned int c, unsigned int r, char t) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr){
+
+Fractal::Fractal(unsigned int c, unsigned int r, char t) : cols(), rows(), maxItr(0), grid(nullptr), type(nullptr){
 	cout << "3-arg constructor called" << endl;
 }
 
-const Fractal& operator=(const Fractal& f {
+const Fractal& Fractal::operator=(const Fractal& f {
 	
 }
 
-Fractal& operator=(Fractal&& f) {
+Fractal& Fractal::operator=(Fractal&& f) {
 	cout << "Move assignment operator called..." << endl;
 }
 
-unsigned int determinePixelColor(Complex z, Complex c ) {
+unsigned int Fractal::determinePixelColor(Complex z, Complex c ) {
 	unsigned int lengthSquared;
 	unsigned iter = 0;
 
@@ -48,11 +51,11 @@ unsigned int determinePixelColor(Complex z, Complex c ) {
 	return maxIter;
 }
 
-void makeJuliaFractal() {
+void Fractal::makeJuliaFractal() {
 	cout << "Now creating the Julia patterns" << endl;
 }
 
-void makeMandelbrotFractal() {
+void Fractal::makeMandelbrotFractal() {
 	cout << "Now creating the Mandelbrot patterns" << endl;
 
 	Complex z;
@@ -75,3 +78,9 @@ void makeMandelbrotFractal() {
 
 }
 
+unsigned int Fractal::converToPixel(unsigned int color) {
+
+}
+double Fractal::getMagnitudeSquared(Complex z) {
+
+}

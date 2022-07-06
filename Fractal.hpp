@@ -10,7 +10,7 @@ protected:
 	unsigned int cols;
 	unsigned int rows;
 	Pixel** grid;
-	unsigned int maxlter;
+	unsigned int maxIter;
 	char type;
 	unsigned int determinePixelColor(Complex, Complex);
 	void makeJuliaFractal();
@@ -25,7 +25,8 @@ public:
 	const Fractal& operator=(const Fractal&);
 	Fractal& operator=(Fractal&&);
 
-
+	unsigned int converToPixel(unsigned int);
+	double getMagnitudeSquared(Complex);
 };
 
 

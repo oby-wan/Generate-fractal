@@ -2,21 +2,21 @@
 #include "Complex.hpp"
 using namespace std;
 
-~Complex()  {
+Complex::~Complex()  {
 	cout << "complex destructor called" << endl;
 }
 
-Complex() : imag(0), real(0) {
+Complex::Complex() : imag(0), real(0) {
 	cout << "default constructor called" << endl;
 }
 
-Complex(const Complex& c) : imag(0), real(0) {
+Complex::Complex(const Complex& c) : imag(0), real(0) {
 	cout << "Copy constructor called" << endl;
 }
 
-Complex(double z, double c) : imag(0), real(0){
+Complex::Complex(double z, double c) : imag(0), real(0){
 	cout << "Parameterized constructor called" << endl;
 }
 
-double& operator[](const char* c){
+double& Complex::operator[](const char* c){
 }
