@@ -10,13 +10,13 @@ Complex() : imag(0), real(0) {
 	cout << "default constructor called" << endl;
 }
 
-Complex(const Complex&) : imag(0), real(0) {
+Complex(const Complex& c) : imag(0), real(0) {
 	cout << "Copy constructor called" << endl;
 }
 
-Complex(double, double) : imag(0), real(0){
-
+Complex(double i, double r) : imag(0), real(0){
+	cout << "Parameterized constructor called" << endl;
 }
 
-double& operator[](const char*){
+double& operator[](const char* c){
 }

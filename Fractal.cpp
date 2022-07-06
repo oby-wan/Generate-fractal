@@ -12,27 +12,27 @@ Fractal() : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
 	cout << "default constructor called" << endl;
 }
 
-Fractal(const Fractal&) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
-
-}
-
-Fractal(Fractal&&) {
-	cout << "Move constructor called..." << endl;
-}
-
-Fractal(unsigned int, unsigned int, char) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr)
-
-}
-
-const Fractal& operator=(const Fractal&) {
+Fractal(const Fractal& f) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr) {
 	cout << "Copy constructor called" << endl;
 }
 
-Fractal& operator=(Fractal&&) {
+Fractal(Fractal&& f) {
+	cout << "Move constructor called..." << endl;
+}
+
+Fractal(unsigned int c, unsigned int r, char t) : cols(), rows(), maxltr(0), grid(nullptr), type(nullptr)
+	cout << "3-arg constructor called" << endl;
+}
+
+const Fractal& operator=(const Fractal& f {
+	
+}
+
+Fractal& operator=(Fractal&& f) {
 	cout << "Move assignment operator called..." << endl;
 }
 
-unsigned int determinePixelColor(Complex, Complex) {
+unsigned int determinePixelColor(Complex i, Complex r ) {
 
 }
 
