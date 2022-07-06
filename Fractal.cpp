@@ -68,7 +68,7 @@ void makeMandelbrotFractal() {
 			imag[c] = ((double)j * step_height) - 2.0;
 			
 
-			Color = determinePixelColor(z, c);
+			unsigned int color = determinePixelColor(z, c);
 			grid[i][j] = converToPixel(color);
 		}
 	}
