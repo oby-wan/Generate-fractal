@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Complex.hpp"
 #include "Fractal.hpp"
+#include "Pixel.hpp"
 
 using namespace std;
 
@@ -11,28 +12,29 @@ Fractal::~Fractal() {
 	grid = nullptr;
 }
 
-Fractal::Fractal() : cols(), rows(), maxIter(0), grid(nullptr), type(nullptr) {
+Fractal::Fractal() : cols(), rows(), maxIter(0), grid(nullptr), type(0) {
 	cout << "default constructor called" << endl;
 }
 
 
-Fractal::Fractal(const Fractal& f) : cols(f.cols), rows(f.rows), maxIter(f.MaxIter), grid(f.grid), type(f.type) {
+Fractal::Fractal(const Fractal& f) : cols(f.cols), rows(f.rows), maxIter(f.maxIter), grid(f.grid), type(f.type) {
 	cout << "Copy constructor called" << endl;
 }
 
 
 Fractal::Fractal(Fractal&& f) {
 	cout << "Move constructor called..." << endl;
+
 }
 
 
-Fractal::Fractal(unsigned int c, unsigned int r, char t) : cols(), rows(), maxItr(0), grid(nullptr), type(nullptr){
+Fractal::Fractal(unsigned int c, unsigned int r, char t) : cols(), rows(), maxIter(0), grid(nullptr), type(0){
 	cout << "3-arg constructor called" << endl;
 
 
 }
 
-const Fractal& Fractal::operator=(const Fractal& f {
+const Fractal& Fractal::operator=(const Fractal& f) {
 	
 }
 
