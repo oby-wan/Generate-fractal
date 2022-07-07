@@ -49,8 +49,8 @@ unsigned int Pixel::converToPixel(unsigned int color) {
 
 unsigned int operator<<(ofstream& file, Pixel& p) {
 
-	ofstream outfile(file);
-	file << p.red << p.green << p.blue;
-	return file;
+	os << p["red"] << " " << p["green"] << " " << p["blue"] << " ";
+
+	return os;
 
 }
