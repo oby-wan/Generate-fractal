@@ -1,21 +1,18 @@
 #pragma once
-
 #include <iostream>
 using namespace std;
 
-class Pixel {
-protected:
+class Pixel
+{
+private:
 	unsigned int blue;
 	unsigned int green;
 	unsigned int red;
-
 public:
-	~Pixel();
-	const unsigned int& operator[](const char*);
 	Pixel();
+	~Pixel();
 	Pixel(const Pixel&);
 	Pixel(unsigned int, unsigned int, unsigned int);
-	Pixel& convertToPixel(unsigned int color);
-
-	friend unsigned int operator<<(ofstream& file, Pixel&);
+	const unsigned int& operator[](const char*);
+	friend ofstream& operator << (ofstream& os, const Pixel& p);
 };
