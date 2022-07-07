@@ -207,8 +207,9 @@ void saveToPPM(const Fractal& f, const char* fn)
 
 	for (int i = 0; i < f.rows; i++)
 	{
-		for (int j = 0; j < f.cols; j++)
+		for (int j = 0; j < f.cols; j++) {
 			outfile << f.grid[i][j] << ' ';
+		}
 
 		outfile << endl;
 	}

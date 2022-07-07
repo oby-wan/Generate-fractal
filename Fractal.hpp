@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Complex.hpp"
-#include "Fractal.hpp"
+
 
 class Fractal {
 
@@ -27,7 +27,7 @@ public:
 
 
 	Fractal testMoveConstructor(unsigned int rows, unsigned int cols, char c);
-	friend void saveToPPM();
+	friend void saveToPPM(const Fractal&, const char* );
 };
 
 
