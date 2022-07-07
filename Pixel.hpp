@@ -1,8 +1,7 @@
 #pragma once
+
 #include <iostream>
-#include "Fractal.hpp"
-
-
+using namespace std;
 
 class Pixel {
 protected:
@@ -16,7 +15,7 @@ public:
 	Pixel();
 	Pixel(const Pixel&);
 	Pixel(unsigned int, unsigned int, unsigned int);
-	unsigned int converToPixel(unsigned int color) {
+	Pixel& convertToPixel(unsigned int color);
 
-	}
+	friend unsigned int operator<<(ofstream& file, Pixel&);
 };
