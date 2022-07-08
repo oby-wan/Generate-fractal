@@ -1,10 +1,18 @@
 #include <iostream>
-
+#include "Complex.hpp"
+#include "Fractal.hpp"
+#include "Pixel.hpp"
 using namespace std;
 
+Fractal testMoveConstructor(unsigned int rows, unsigned int cols, char c) {
+	Fractal temp = Fractal(rows, cols, c);
+
+	return temp;
+}
 
 int main()
 {
+
 	Fractal m1(768U, 1024U, 'm'), j1(768U, 1024U, 'j'), m2, j2;
 	saveToPPM(m1, "mandelbrot.ppm");
 	saveToPPM(j1, "julia.ppm");

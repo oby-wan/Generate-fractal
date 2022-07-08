@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Pixel.hpp"
 #include "Fractal.hpp"
+#include <fstream>
 
 using namespace std;
 
@@ -33,9 +34,9 @@ Pixel::Pixel(unsigned int b, unsigned int g, unsigned int r) : blue(b), green(g)
 }
 
 ofstream& operator<<(ofstream& os, Pixel& p) {
-
+	
 	os << p["red"] << " " << p["green"] << " " << p["blue"] << " ";
-
+	
 	return os;
 
 }

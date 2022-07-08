@@ -5,13 +5,11 @@
 #include "fstream"
 using namespace std;
 
-Fractal::Fractal() : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ')
-{
+Fractal::Fractal() : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ') {
 	cout << "> Default constructor called" << endl;
 }
 
-Fractal::Fractal(const Fractal& a) : cols(0), rows(0), grid(nullptr), maxIter(0), type(' ')
-{
+Fractal::Fractal(const Fractal& a) : cols(0), rows(0), grid(nullptr), maxIter(0), type(' ') {
 	cout << "> Copy constructor called" << endl;
 
 	rows = a.rows;
@@ -30,8 +28,7 @@ Fractal::Fractal(const Fractal& a) : cols(0), rows(0), grid(nullptr), maxIter(0)
 	}
 }
 
-Fractal::Fractal(Fractal&& a) : cols(0), rows(0), grid(nullptr), maxIter(0), type(' ')
-{
+Fractal::Fractal(Fractal&& a) noexcept : cols(0), rows(0), grid(nullptr), maxIter(0), type(' ') {
 	cout << "> Move constructor called" << endl;
 
 	if ((a.type != 'm' && a.type != 'j'))
@@ -48,8 +45,7 @@ Fractal::Fractal(Fractal&& a) : cols(0), rows(0), grid(nullptr), maxIter(0), typ
 	a.grid = nullptr;
 }
 
-Fractal::Fractal(unsigned int a, unsigned int b, char c) : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ')
-{
+Fractal::Fractal(unsigned int a, unsigned int b, char c) : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ') {
 	cout << "> 3-arg constructor called" << endl;
 
 	rows = a;
@@ -62,8 +58,7 @@ Fractal::Fractal(unsigned int a, unsigned int b, char c) : cols(0), rows(0), gri
 		grid[i] = new Pixel[cols];
 }
 
-const Fractal& Fractal::operator=(const Fractal& a)
-{
+const Fractal& Fractal::operator=(const Fractal& a) {
 	cout << "> Fractal assignment operator called" << endl;
 
 	cols = a.cols;
@@ -95,8 +90,7 @@ const Fractal& Fractal::operator=(const Fractal& a)
 	return *this;
 }
 
-Fractal& Fractal::operator=(Fractal&& a)
-{
+Fractal& Fractal::operator=(Fractal&& a) {
 	cout << "> Move assignment operator called" << endl;
 
 	if (this != &a)
@@ -111,8 +105,7 @@ Fractal& Fractal::operator=(Fractal&& a)
 	return *this;
 }
 
-Fractal::~Fractal()
-{
+Fractal::~Fractal() {
 	cout << "> Destructor called" << endl;
 
 	for (int i = 0; i < rows; i++)
@@ -125,8 +118,7 @@ Fractal::~Fractal()
 	grid = nullptr;
 }
 
-unsigned int Fractal::determinePixelColor(Complex z, Complex c)
-{
+unsigned int Fractal::determinePixelColor(Complex z, Complex c) {
 	double lengthSquared;
 	int iter = 0;
 	while (iter < maxIter)
@@ -141,8 +133,7 @@ unsigned int Fractal::determinePixelColor(Complex z, Complex c)
 	return maxIter;
 }
 
-void Fractal::makeMandelbrotFractal()
-{
+void Fractal::makeMandelbrotFractal() {
 	cout << "> Now creating the Mandelbrot patterns..." << endl;
 
 	Complex Z, C;
@@ -164,8 +155,7 @@ void Fractal::makeMandelbrotFractal()
 	}
 }
 
-void Fractal::makeJuliaFractal()
-{
+void Fractal::makeJuliaFractal() {
 	cout << "> Now creating the Julia patterns..." << endl;
 
 	Complex Z, C;
@@ -178,8 +168,8 @@ void Fractal::makeJuliaFractal()
 		{
 			Z["imag"] = ((double)k * step_width) - 2.0;
 			Z["real"] = ((double)j * step_height) - 2.0;
-			C["real"] = 1.0;
-			C["imag"] = 1.0;
+			C["real"] = -0.8;
+			C["imag"] = 0.156;
 
 			unsigned int Color = determinePixelColor(Z, C);
 			grid[j][k] = converToPixel(Color);
@@ -187,15 +177,9 @@ void Fractal::makeJuliaFractal()
 	}
 }
 
-Fractal Fractal::testMoveConstructor(unsigned int rows, unsigned int cols, char c)
-{
-	Fractal temp = Fractal(rows, cols, c);
 
-	return temp;
-}
 
-void saveToPPM(const Fractal& f, const char* fn)
-{
+void saveToPPM(const Fractal& f, const char* fn) {
 	cout << "> Saving Fractal Object to ASCII File..." << endl;
 
 	ofstream outfile(fn);
