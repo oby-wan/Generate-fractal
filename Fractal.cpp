@@ -159,7 +159,7 @@ void Fractal::makeMandelbrotFractal()
 			C["imag"] = ((double)k * step_width) - 2.0;
 
 			unsigned int Color = determinePixelColor(Z, C);
-			grid[j][k] = grid[j][k].convertToPixel(Color);
+			grid[j][k] = converToPixel(Color);
 		}
 	}
 }
@@ -182,7 +182,7 @@ void Fractal::makeJuliaFractal()
 			C["imag"] = 1.0;
 
 			unsigned int Color = determinePixelColor(Z, C);
-			grid[j][k] = grid[j][k].convertToPixel(Color);
+			grid[j][k] = converToPixel(Color);
 		}
 	}
 }
@@ -208,9 +208,15 @@ void saveToPPM(const Fractal& f, const char* fn)
 	for (int i = 0; i < f.rows; i++)
 	{
 		for (int j = 0; j < f.cols; j++) {
-			outfile << f.grid[i][j] << ' ';
+			outfile << f.grid[i][j] << " ";
 		}
 
 		outfile << endl;
 	}
+}
+
+Pixel Fractal::converToPixel(unsigned int color) {
+	Pixel convert((color / 64) % 8, (color / 8) % 8, color % 8);
+
+	return convert;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Complex.hpp"
+#include <cstring>
 using namespace std;
 
 Complex::~Complex() 

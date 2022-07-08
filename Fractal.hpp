@@ -28,6 +28,7 @@ public:
 
 	Fractal testMoveConstructor(unsigned int rows, unsigned int cols, char c);
 	friend void saveToPPM(const Fractal&, const char* );
+	Pixel converToPixel(unsigned int color);
 };
 
 

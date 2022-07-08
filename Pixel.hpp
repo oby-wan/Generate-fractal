@@ -14,5 +14,6 @@ public:
 	Pixel(const Pixel&);
 	Pixel(unsigned int, unsigned int, unsigned int);
 	const unsigned int& operator[](const char*);
-	friend ofstream& operator << (ofstream& os, const Pixel& p);
+	friend ofstream& operator<<(ofstream& , const Pixel& );
+
 };
