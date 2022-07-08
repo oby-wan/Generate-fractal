@@ -33,9 +33,9 @@ Pixel::Pixel(unsigned int b, unsigned int g, unsigned int r) : blue(b), green(g)
 	cout << "3-arg constructor called" << endl;
 }
 
-ofstream& operator<<(ofstream& os, Pixel& p) {
+ofstream& operator<<(ofstream& os, const Pixel& p) {
 	
-	os << p["red"] << " " << p["green"] << " " << p["blue"] << " ";
+	os << p.red << " " << p.green << " " << p.blue << " ";
 	
 	return os;
 
