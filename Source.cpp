@@ -1,7 +1,14 @@
 #include <iostream>
+#include "Fractal.hpp"
 
 using namespace std;
 
+Fractal testMoveConstructor(unsigned int rows, unsigned int cols, char c)
+{
+	Fractal temp = Fractal(rows, cols, c);
+
+	return temp;
+}
 
 int main()
 {
@@ -10,38 +17,8 @@ int main()
 	saveToPPM(j1, "julia.ppm");
 	m2 = Fractal(m1);
 	j2 = testMoveConstructor(600U, 800U, 'j');
+
 	saveToPPM(j2, "julia_2.ppm");
 	return 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-Group Members
-
-Parivash Gholipourganjgah
-Bailey Holmes
-Toby Hosseinnia
-Raffi Macaraig
-
-*/
