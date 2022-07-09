@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Complex.hpp"
-#include "Fractal.hpp"
+#include "Pixel.hpp"
 
 class Fractal {
 
@@ -24,10 +24,7 @@ public:
 	Fractal(unsigned int, unsigned int, char);
 	const Fractal& operator=(const Fractal&);
 	Fractal& operator=(Fractal&&);
+	Pixel convertToPixel(unsigned int color);
 
-
-	Fractal testMoveConstructor(unsigned int rows, unsigned int cols, char c);
-	friend void saveToPPM();
+	friend void saveToPPM(const Fractal&, const char*);
 };
-
-
