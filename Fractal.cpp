@@ -28,6 +28,16 @@ Fractal::Fractal(const Fractal& a) : cols(0), rows(0), grid(nullptr), maxIter(0)
 		for (int j = 0; j < cols; j++)
 			grid[i][j] = a.grid[i][j];
 	}
+
+	if (type == 'm')
+		makeMandelbrotFractal();
+	else if (type == 'j')
+		makeJuliaFractal();
+	else
+	{
+		cout << "Error: Invalid Type." << endl;
+		exit(1);
+	}
 }
 
 Fractal::Fractal(Fractal&& a) : cols(0), rows(0), grid(nullptr), maxIter(0), type(' ')
@@ -36,7 +46,7 @@ Fractal::Fractal(Fractal&& a) : cols(0), rows(0), grid(nullptr), maxIter(0), typ
 
 	if ((a.type != 'm' && a.type != 'j'))
 	{
-		cout << "ERROR: Invalid type, please choose a type of either 'm' or 'j'" << endl;
+		cout << "Error: Invalid Type." << endl;
 		exit(1);
 	}
 
@@ -60,6 +70,16 @@ Fractal::Fractal(unsigned int a, unsigned int b, char c) : cols(0), rows(0), gri
 
 	for (int i = 0; i < rows; i++)
 		grid[i] = new Pixel[cols];
+
+	if (type == 'm')
+		makeMandelbrotFractal();
+	else if (type == 'j')
+		makeJuliaFractal();
+	else
+	{
+		cout << "Error: Invalid Type." << endl;
+		exit(1);
+	}	
 }
 
 const Fractal& Fractal::operator=(const Fractal& a)
@@ -115,29 +135,34 @@ Fractal::~Fractal()
 {
 	cout << "> Destructor called" << endl;
 
-	for (int i = 0; i < rows; i++)
+	if (grid != nullptr)
 	{
-		delete[] grid[i];
-		grid[i] = nullptr;
+		for (int i = 0; i < rows; i++)
+		{
+			delete[] grid[i];
+			grid[i] = nullptr;
+		}
 	}
-
+	
 	delete[] grid;
 	grid = nullptr;
 }
 
-unsigned int Fractal::determinePixelColor(Complex z, Complex c)
+unsigned int Fractal::determinePixelColor(Complex Z, Complex C)
 {
 	double lengthSquared;
+
 	int iter = 0;
 	while (iter < maxIter)
 	{
 		iter = iter + 1;
-		z = z * z;
-		z = z + c;
-		lengthSquared = getMagnitudeSquared(z);
+		Z = Z * Z;
+		Z = Z + C;
+		lengthSquared = getMagnitudeSquared(Z);
 		if (lengthSquared > 4.0)
 			return iter;
 	}
+
 	return maxIter;
 }
 
@@ -155,11 +180,12 @@ void Fractal::makeMandelbrotFractal()
 		{
 			Z["imag"] = 0.0;
 			Z["real"] = 0.0;
+
 			C["real"] = ((double)j * step_height) - 2.0;
 			C["imag"] = ((double)k * step_width) - 2.0;
 
 			unsigned int Color = determinePixelColor(Z, C);
-			grid[j][k] = grid[j][k].convertToPixel(Color);
+			grid[j][k] = convertToPixel(Color);
 		}
 	}
 }
@@ -176,22 +202,23 @@ void Fractal::makeJuliaFractal()
 	{
 		for (int k = 0; k < cols; k++)
 		{
-			Z["imag"] = ((double)k * step_width) - 2.0;
 			Z["real"] = ((double)j * step_height) - 2.0;
-			C["real"] = 1.0;
+			Z["imag"] = ((double)k * step_width) - 2.0;
+
 			C["imag"] = 1.0;
+			C["real"] = 1.0;
 
 			unsigned int Color = determinePixelColor(Z, C);
-			grid[j][k] = grid[j][k].convertToPixel(Color);
+			grid[j][k] = convertToPixel(Color);
 		}
 	}
 }
 
-Fractal Fractal::testMoveConstructor(unsigned int rows, unsigned int cols, char c)
+Pixel Fractal::convertToPixel(unsigned int color) 
 {
-	Fractal temp = Fractal(rows, cols, c);
+	Pixel convert((color / 64) % 8, (color / 8) % 8, color % 8);
 
-	return temp;
+	return convert;
 }
 
 void saveToPPM(const Fractal& f, const char* fn)
