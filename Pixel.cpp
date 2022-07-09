@@ -36,7 +36,7 @@ Pixel::Pixel(const Pixel& p) : blue(p.blue), green(p.green), red(p.red)
 
 Pixel::Pixel(unsigned int b, unsigned int g, unsigned int r) : blue(b), green(g), red(r) 
 {
-	// don't need cout statement
+	// don't need cout statement 
 }
 
 ofstream& operator<<(ofstream& os, Pixel& p) 
