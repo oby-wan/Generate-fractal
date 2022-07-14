@@ -33,6 +33,7 @@ Fractal::Fractal(unsigned int a, unsigned int b, char c) : cols(0), rows(0), gri
 	else if (type == 'l') {
 		for (double j = 0, r = -0.70176, i = -0.3842; j < 200; j++, r += 0.003, i -= 0.002) {
 			makeJuliaFractal(r, i, (int)j);
+			saveToPPM(*this, to_string(j) + ".ppm");
 		}
 	}
 
@@ -227,32 +228,7 @@ void Fractal::makeJuliaFractal(double i, double r, int count) {
 		}
 	}
 
-	/*if (count > 9) {
-		count += 49;
-
-		const char temp[] = { 'j', 'u', 'l', 'i', 'a', '_', '0', '0', count, '.', 'p', 'p', 'm', '\0'};
-		const char* tempPtr = temp;
-		saveToPPM(*this, tempPtr);
-	}
-
-	else if(count > 99) {
-		int dig3 = count / 100;
-		int dig2 = (count - (dig3 * 100)) / 10;
-		count += 49;
-
-		const char temp[] = { 'j', 'u', 'l', 'i', 'a', '_', dig3, dig2, count, '.', 'p', 'p', 'm', '\0'};
-		const char* tempPtr = temp;
-		saveToPPM(*this, tempPtr);
-	}
-
-	else {
-		int dig2 = (count / 10) + 49;
-		count += 49;
-
-		const char temp[] = { 'j', 'u', 'l', 'i', 'a', '_', '0', dig2, count, '.', 'p', 'p', 'm', '\0'};
-		const char* tempPtr = temp;
-		saveToPPM(*this, tempPtr);
-	}*/
+	
 
 	string name = "Julia";
 

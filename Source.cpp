@@ -18,6 +18,7 @@ int main()
 	saveToPPM(j1, "julia.ppm");
 	m2 = Fractal(m1);
 	j2 = testMoveConstructor(600U, 800U, 'j');
+	Fractal j3(768U, 1024U, 'l');
 	saveToPPM(j2, "julia_2.ppm");
 	return 0;
 }
