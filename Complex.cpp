@@ -1,28 +1,11 @@
-#include <iostream>
 #include "Complex.hpp"
-#include <cstring>
-using namespace std;
 
-Complex::~Complex() 
-{
-	cout << "complex destructor called" << endl;
-}
+Complex::Complex() : real(0.0), imag(0.0) {}
 
-Complex::Complex() : imag(0.0), real(0.0)
-{
-	cout << "default constructor called" << endl;
-}
+Complex::~Complex() {}
 
-Complex::Complex(const Complex& a) : imag(a.imag), real(a.real)
-{
-	cout << "Copy constructor called" << endl;
-
-}
-
-Complex::Complex(double a, double b) : imag(a), real(b)
-{
-	cout << "Parameterized constructor called" << endl;
-}
+Complex::Complex(const Complex& a) : real(a.real), imag(a.imag) {}
+Complex::Complex(double a, double b) : real(b), imag(a) {}
 
 double& Complex::operator[](const char* a)
 {
@@ -33,7 +16,6 @@ double& Complex::operator[](const char* a)
 	else
 		exit(1);
 }
-
 const Complex operator*(const Complex& a, const Complex& b)
 {
 	Complex x;
@@ -45,13 +27,13 @@ const Complex operator*(const Complex& a, const Complex& b)
 const Complex operator+(const Complex& a, const Complex& b)
 {
 	Complex x;
-	x.imag = (a.imag) + (b.imag);
 	x.real = (a.real) + (b.real);
+	x.imag = (a.imag) + (b.imag);
 	return x;
 }
 
 double getMagnitudeSquared(const Complex& a)
 {
-	double c = (a.imag)*(a.imag) + (a.real)*(a.real);
+	double c = (a.imag) * (a.imag) + (a.real) * (a.real);
 	return c;
 }

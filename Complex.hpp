@@ -2,7 +2,6 @@
 #include <iostream>
 
 using namespace std;
-
 class Complex
 {
 private:
@@ -18,3 +17,4 @@ public:
 	friend const Complex operator+(const Complex&, const Complex&);
 	friend double getMagnitudeSquared(const Complex&);
 };
+

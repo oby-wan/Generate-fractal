@@ -3,47 +3,10 @@
 #include "Pixel.hpp"
 #include "Fractal.hpp"
 #include "fstream"
+#include <string>
 using namespace std;
 
-Fractal::Fractal() : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ') {
-	cout << "> Default constructor called" << endl;
-}
-
-Fractal::Fractal(const Fractal& a) : cols(0), rows(0), grid(nullptr), maxIter(0), type(' ') {
-	cout << "> Copy constructor called" << endl;
-
-	rows = a.rows;
-	cols = a.cols;
-	type = a.type;
-	maxIter = a.maxIter;
-
-	grid = new Pixel* [rows];
-	
-	for (int i = 0; i < rows; i++)
-	{
-		grid[i] = new Pixel[cols];
-
-		for (int j = 0; j < cols; j++)
-			grid[i][j] = a.grid[i][j];
-	}
-}
-
-Fractal::Fractal(Fractal&& a) noexcept : cols(0), rows(0), grid(nullptr), maxIter(0), type(' ') {
-	cout << "> Move constructor called" << endl;
-
-	if ((a.type != 'm' && a.type != 'j'))
-	{
-		cout << "ERROR: Invalid type, please choose a type of either 'm' or 'j'" << endl;
-		exit(1);
-	}
-
-	type = a.type;
-	rows = a.rows;
-	cols = a.cols;
-	maxIter = a.maxIter;
-	grid = a.grid;
-	a.grid = nullptr;
-}
+Fractal::Fractal() : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ') {}
 
 Fractal::Fractal(unsigned int a, unsigned int b, char c) : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ') {
 	cout << "> 3-arg constructor called" << endl;
@@ -51,12 +14,75 @@ Fractal::Fractal(unsigned int a, unsigned int b, char c) : cols(0), rows(0), gri
 	rows = a;
 	cols = b;
 	type = c;
-	
+
 	grid = new Pixel * [rows];
 
 	for (int i = 0; i < rows; i++)
+	{
 		grid[i] = new Pixel[cols];
+	}
+	if (type == 'm')
+	{
+		makeMandelbrotFractal();
+	}
+	else if (type == 'j')
+	{
+		makeJuliaFractal();
+	}
+
+	else if (type == 'l') {
+		for (double j = 0, r = -0.70176, i = -0.3842; j < 200; j++, r += 0.003, i -= 0.002) {
+			makeJuliaFractal(r, i, (int)j);
+		}
+	}
+
+	else
+	{
+		cout << "ERROR: Invalid type, please choose a type of either 'm' or 'j'" << endl;
+		exit(1);
+	}
+
 }
+
+Fractal::Fractal(const Fractal& a) : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ') {
+
+	cout << "> Copy constructor called" << endl;
+
+	rows = a.rows;
+	cols = a.cols;
+	type = a.type;
+	maxIter = a.maxIter;
+
+	grid = new Pixel * [rows];
+
+	for (int i = 0; i < rows; i++)
+	{
+		grid[i] = new Pixel[cols];
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+			grid[i][j] = a.grid[i][j];
+	}
+}
+
+Fractal::Fractal(Fractal&& a) noexcept : cols(0), rows(0), grid(nullptr), maxIter(512), type(' ') {
+	cout << "> Move constructor called" << endl;
+
+	type = a.type;
+	rows = a.rows;
+	cols = a.cols;
+	maxIter = a.maxIter;
+	grid = a.grid;
+	a.grid = nullptr;
+	a.cols = 0;
+	a.rows = 0;
+	a.maxIter = 0;
+	a.type = '\0';
+}
+
+
 
 const Fractal& Fractal::operator=(const Fractal& a) {
 	cout << "> Fractal assignment operator called" << endl;
@@ -73,18 +99,22 @@ const Fractal& Fractal::operator=(const Fractal& a) {
 			for (int i = 0; i < rows; i++)
 			{
 				delete[] grid[i];
-				grid[i] = nullptr;
 			}
 			delete[] grid;
+			grid = nullptr;
 		}
-			
+
 		grid = new Pixel * [rows];
 		for (int i = 0; i < rows; i++)
 		{
 			grid[i] = new Pixel[cols];
-			for (int j = 0; j < cols; j++)
-				grid[i][j] = a.grid[i][j];
 		}
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < cols; j++)
+			{
+				grid[i][j] = a.grid[i][j];
+			}
 	}
 
 	return *this;
@@ -113,7 +143,6 @@ Fractal::~Fractal() {
 		delete[] grid[i];
 		grid[i] = nullptr;
 	}
-
 	delete[] grid;
 	grid = nullptr;
 }
@@ -177,25 +206,85 @@ void Fractal::makeJuliaFractal() {
 	}
 }
 
+void Fractal::makeJuliaFractal(double i, double r, int count) {
+	cout << "> Now creating the Julia patterns..." << endl;
 
+	Complex Z, C;
+	double step_height = 4.0 / (double)rows;
+	double step_width = 4.0 / (double)cols;
 
-void saveToPPM(const Fractal& f, const char* fn) {
-	cout << "> Saving Fractal Object to ASCII File..." << endl;
-
-	ofstream outfile(fn);
-
-	outfile << "P6" << '\n'
-		<< "# Sample Comment" << '\n'
-		<< f.rows << ' ' << f.cols << '\n'
-		<< f.maxIter << '\n';
-
-	for (int i = 0; i < f.rows; i++)
+	for (double j = 0; j < rows; j++)
 	{
-		for (int j = 0; j < f.cols; j++) {
-			outfile << f.grid[i][j] << " ";
+		for (int k = 0; k < cols; k++)
+		{
+			Z["imag"] = ((double)k * step_width) - 2.0;
+			Z["real"] = (j * step_height) - 2.0;
+			C["real"] = r;
+			C["imag"] = i;
+
+			unsigned int Color = determinePixelColor(Z, C);
+			grid[(int)j][k] = converToPixel(Color);
+		}
+	}
+
+	/*if (count > 9) {
+		count += 49;
+
+		const char temp[] = { 'j', 'u', 'l', 'i', 'a', '_', '0', '0', count, '.', 'p', 'p', 'm', '\0'};
+		const char* tempPtr = temp;
+		saveToPPM(*this, tempPtr);
+	}
+
+	else if(count > 99) {
+		int dig3 = count / 100;
+		int dig2 = (count - (dig3 * 100)) / 10;
+		count += 49;
+
+		const char temp[] = { 'j', 'u', 'l', 'i', 'a', '_', dig3, dig2, count, '.', 'p', 'p', 'm', '\0'};
+		const char* tempPtr = temp;
+		saveToPPM(*this, tempPtr);
+	}
+
+	else {
+		int dig2 = (count / 10) + 49;
+		count += 49;
+
+		const char temp[] = { 'j', 'u', 'l', 'i', 'a', '_', '0', dig2, count, '.', 'p', 'p', 'm', '\0'};
+		const char* tempPtr = temp;
+		saveToPPM(*this, tempPtr);
+	}*/
+
+	string name = "Julia";
+
+}
+
+
+
+void saveToPPM(const Fractal& f, string fn) {
+	cout << "> Saving Fractal Object to ASCII File..." << endl;
+	if (f.grid != nullptr)
+	{
+		ofstream outfile(fn, ios::out);
+
+		outfile << "P3" << '\n'
+			<< f.cols << ' ' << f.rows << '\n'
+			<< "# Sample Comment" << '\n'
+			<< (f.maxIter / (64) - 1) << '\n';
+
+		for (unsigned int i = 0; i < f.rows; i++)
+		{
+			for (unsigned int j = 0; j < f.cols; j++) {
+				outfile << f.grid[i][j] << " ";
+			}
+
+			outfile << endl;
 		}
 
-		outfile << endl;
+		outfile.close();
+	}
+	else
+	{
+		cout << "Error: PGM object is uninitialized." << endl;
 	}
 }
 
